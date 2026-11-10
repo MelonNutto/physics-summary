@@ -538,72 +538,215 @@
                 padding: 1.5rem;
             }
         }
-    </style>
+    
+/* Single-Page Chapter Viewing Styles */
+.chapter-content {
+    display: none !important;
+}
+.chapter-content.active {
+    display: block !important;
+    animation: fadeIn 0.25s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Chapter Bottom Navigation Bar */
+.chapter-nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 3.5rem;
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e2e8f0;
+}
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.85rem 1.4rem;
+    background: #ffffff;
+    border: 2px solid #cbd5e1;
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    color: #1e293b;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.nav-btn:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+    color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37,99,235,0.15);
+}
+.nav-btn.prev-btn {
+    margin-right: auto;
+    text-align: left;
+}
+.nav-btn.next-btn {
+    margin-left: auto;
+    text-align: right;
+}
+.nav-arrow {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+.nav-label {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: 0.5px;
+}
+.nav-title {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+/* Overview Roadmap Cards */
+.chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 2.5rem;
+}
+.chapter-card-nav {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 1.4rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+.chapter-card-nav:hover {
+    border-color: #3b82f6;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(59,130,246,0.12);
+}
+.card-badge-nav {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: #eff6ff;
+    color: #2563eb;
+    margin-bottom: 0.6rem;
+    width: fit-content;
+}
+.card-title-nav {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.4rem;
+}
+.card-desc-nav {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+.card-btn-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+@media (max-width: 640px) {
+    .chapter-nav-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .nav-btn.prev-btn, .nav-btn.next-btn {
+        margin: 0;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+</style>
 </head>
 <body>
 
 <div class="wrapper">
     <!-- Sticky Navigation Sidebar -->
     <aside class="sidebar">
-        <div class="sidebar-brand" onclick="scrollToChapter('overview'); setActiveLink('overview');">
+        <div class="sidebar-brand" onclick="showChapter('overview');">
             📚 Exam Study Guide
         </div>
         <ul class="toc-list" id="sidebar-toc">
             <li class="toc-item">
-                <a class="toc-link active" href="#overview" data-target="overview" onclick="onSidebarClick('overview');">
+                <a class="toc-link active" href="#overview" data-target="overview" onclick="showChapter('overview'); return false;">
                     📌 ข้อมูลภาพรวมวิชา
                 </a>
             </li>
             <li class="toc-item">
-                <a class="toc-link" href="#chapter1" data-target="chapter1" onclick="onSidebarClick('chapter1');">
+                <a class="toc-link" href="#chapter1" data-target="chapter1" onclick="showChapter('chapter1'); return false;">
                     ⚡ บทที่ 1: Basic Circuit 1
                 </a>
             </li>
             <li class="toc-item">
-                <a class="toc-link" href="#chapter2" data-target="chapter2" onclick="onSidebarClick('chapter2');">
+                <a class="toc-link" href="#chapter2" data-target="chapter2" onclick="showChapter('chapter2'); return false;">
                     🔄 บทที่ 2: Basic Circuit 2 & Supernode
                 </a>
             </li>
             <li class="toc-item">
-                <a class="toc-link" href="#chapter3" data-target="chapter3" onclick="onSidebarClick('chapter3');">
+                <a class="toc-link" href="#chapter3" data-target="chapter3" onclick="showChapter('chapter3'); return false;">
                     💻 บทที่ 3: Microcontroller 1 & Arduino
                 </a>
             </li>
             <li class="toc-item">
-                <a class="toc-link" href="#chapter4" data-target="chapter4" onclick="onSidebarClick('chapter4');">
+                <a class="toc-link" href="#chapter4" data-target="chapter4" onclick="showChapter('chapter4'); return false;">
                     🎛️ บทที่ 4: Signals, PWM & ADC
                 </a>
             </li>
             <li class="toc-item">
-                <a class="toc-link" href="#chapter5" data-target="chapter5" onclick="onSidebarClick('chapter5');">
+                <a class="toc-link" href="#chapter5" data-target="chapter5" onclick="showChapter('chapter5'); return false;">
                     🌡️ บทที่ 5: Sensors, I2C & Actuators
                 </a>
             </li>
             <li class="toc-item">
-                <a class="toc-link" href="#chapter6" data-target="chapter6" onclick="onSidebarClick('chapter6');">
+                <a class="toc-link" href="#chapter6" data-target="chapter6" onclick="showChapter('chapter6'); return false;">
                     🌐 บทที่ 6: IoT, MQTT & WebSocket
                 </a>
             </li>
             <li class="toc-item">
-                <a class="toc-link" href="#chapter7" data-target="chapter7" onclick="onSidebarClick('chapter7');">
+                <a class="toc-link" href="#chapter7" data-target="chapter7" onclick="showChapter('chapter7'); return false;">
                     📖 บทที่ 7: พจนานุกรมคำย่อ (Glossary)
                 </a>
             </li>
             <li class="toc-item">
-                <a class="toc-link" href="#chapter8" data-target="chapter8" onclick="onSidebarClick('chapter8');">
+                <a class="toc-link" href="#chapter8" data-target="chapter8" onclick="showChapter('chapter8'); return false;">
                     📝 บทที่ 8: สรุปสูตรและแนวข้อสอบ 10 ข้อ
                 </a>
             </li>
         </ul>
         <div style="margin-top: 1.5rem; padding: 1rem; background: #f1f5f9; border-radius: 8px; font-size: 0.82rem; color: #64748b;">
-            🔒 <strong>Click-Lock:</strong> แถบสีด้านซ้ายจะล็อกอยู่กับบทที่คุณคลิกเลือกเสมอ แม้จะเลื่อนหน้าจออ่าน ก็จะไม่เด้งเปลี่ยนบทเอง
+            📖 <strong>ระบบแยกอ่านทีละบท:</strong> คลิกเลือกบทที่ต้องการอ่านได้ทางซ้าย หรือใช้ปุ่มลูกศรท้ายแต่ละบทเพื่อเปลี่ยนบท
         </div>
     </aside>
 
     <!-- Main Content Area (Continuous Document with all chapters) -->
     <main class="main-container">
         <!-- Overview Header -->
-        <header id="overview" class="hero-banner">
+        <section id="overview" class="chapter-content active">
+    <header  class="hero-banner">
             <h1>สรุปเนื้อหาเตรียมสอบวิชาฟิสิกส์ วงจรไฟฟ้า ไมโครคอนโทรลเลอร์ และ IoT</h1>
             <p class="hero-subtitle">
                 คู่มือทบทวนเนื้อหาฉบับสมบูรณ์อย่างละเอียด ครอบคลุมเอกสารการบรรยายทั้ง 6 ชุด (323 หน้า) พร้อมภาพประกอบ คำอธิบายคำย่อ กฎทางวิศวกรรมไฟฟ้า และแนวข้อสอบจริงพร้อมวิธีทำ
@@ -615,10 +758,117 @@
                 <span class="meta-pill">🔤 ดัชนีคำย่อ 50+ รายการ</span>
             </div>
         </header>
+    <div style="margin-top: 2rem;">
+        <h2 style="font-size: 1.35rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">
+            📑 สารบัญเลือกอ่านทีละบทเรียน (Chapter Navigation)
+        </h2>
+        <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 1.5rem;">
+            คลิกที่การ์ดบทเรียนที่ต้องการเพื่อเริ่มอ่าน หรือใช้แถบเมนูด้านซ้ายมือ โดยแต่ละบทจะแสดงเนื้อหาเฉพาะของตัวเองแบบเป็นสัดส่วน
+        </p>
+        <div class="chapter-grid">
+            
+        <div class="chapter-card-nav" onclick="showChapter('chapter1');">
+            <div>
+                <span class="card-badge-nav">บทที่ 1</span>
+                <div class="card-title-nav">บทที่ 1: Basic Circuit 1</div>
+                <div class="card-desc-nav">กฎของโอห์ม (Ohm's Law), กฎกระแสและแรงดันของเคอร์ชอฟฟ์ (KCL & KVL), วงจรแบ่งแรงดันและกระแส</div>
+            </div>
+            <div class="card-btn-nav">
+                คลิกเริ่มอ่านบทนี้ <span>➡️</span>
+            </div>
+        </div>
+    
+        <div class="chapter-card-nav" onclick="showChapter('chapter2');">
+            <div>
+                <span class="card-badge-nav">บทที่ 2</span>
+                <div class="card-title-nav">บทที่ 2: Basic Circuit 2 & Supernode</div>
+                <div class="card-desc-nav">การวิเคราะห์วงจรด้วยวิธีแรงดันโนด (Nodal Analysis), แหล่งจ่ายควบคุม และเทคนิคซูเปอร์โนด (Supernode)</div>
+            </div>
+            <div class="card-btn-nav">
+                คลิกเริ่มอ่านบทนี้ <span>➡️</span>
+            </div>
+        </div>
+    
+        <div class="chapter-card-nav" onclick="showChapter('chapter3');">
+            <div>
+                <span class="card-badge-nav">บทที่ 3</span>
+                <div class="card-title-nav">บทที่ 3: Microcontroller 1 & Arduino</div>
+                <div class="card-desc-nav">สถาปัตยกรรม MCU (Von Neumann vs Harvard), บอร์ด Arduino Uno R3, ATmega328P, และการเขียนโปรแกรมควบคุม GPIO</div>
+            </div>
+            <div class="card-btn-nav">
+                คลิกเริ่มอ่านบทนี้ <span>➡️</span>
+            </div>
+        </div>
+    
+        <div class="chapter-card-nav" onclick="showChapter('chapter4');">
+            <div>
+                <span class="card-badge-nav">บทที่ 4</span>
+                <div class="card-title-nav">บทที่ 4: Signals, PWM & ADC</div>
+                <div class="card-desc-nav">สัญญาณแอนะล็อกและดิจิทัล, การมอดูเลตความกว้างพัลส์ (PWM), ความละเอียดการแปลงสัญญาณ (ADC Resolution)</div>
+            </div>
+            <div class="card-btn-nav">
+                คลิกเริ่มอ่านบทนี้ <span>➡️</span>
+            </div>
+        </div>
+    
+        <div class="chapter-card-nav" onclick="showChapter('chapter5');">
+            <div>
+                <span class="card-badge-nav">บทที่ 5</span>
+                <div class="card-title-nav">บทที่ 5: Sensors, I2C & Actuators</div>
+                <div class="card-desc-nav">เซนเซอร์ดิจิทัลและแอนะล็อก, การสื่อสารแบบอนุกรมผ่านบัส I2C (SDA/SCL), ตัวขับแอคทูเอเตอร์ และ Relay</div>
+            </div>
+            <div class="card-btn-nav">
+                คลิกเริ่มอ่านบทนี้ <span>➡️</span>
+            </div>
+        </div>
+    
+        <div class="chapter-card-nav" onclick="showChapter('chapter6');">
+            <div>
+                <span class="card-badge-nav">บทที่ 6</span>
+                <div class="card-title-nav">บทที่ 6: IoT, MQTT & WebSocket</div>
+                <div class="card-desc-nav">สถาปัตยกรรมอินเทอร์เน็ตของสรรพสิ่ง (IoT), โพรโทคอล MQTT (Broker, Publish-Subscribe), และ WebSocket</div>
+            </div>
+            <div class="card-btn-nav">
+                คลิกเริ่มอ่านบทนี้ <span>➡️</span>
+            </div>
+        </div>
+    
+        <div class="chapter-card-nav" onclick="showChapter('chapter7');">
+            <div>
+                <span class="card-badge-nav">บทที่ 7</span>
+                <div class="card-title-nav">บทที่ 7: พจนานุกรมคำย่อ (Glossary)</div>
+                <div class="card-desc-nav">รวบรวมตัวอักษรย่อ คำศัพท์ทางเทคนิค พร้อมคำแปลภาษาไทยและการอธิบายความหมายอย่างละเอียด 50+ คำ</div>
+            </div>
+            <div class="card-btn-nav">
+                คลิกเริ่มอ่านบทนี้ <span>➡️</span>
+            </div>
+        </div>
+    
+        <div class="chapter-card-nav" onclick="showChapter('chapter8');">
+            <div>
+                <span class="card-badge-nav">บทที่ 8</span>
+                <div class="card-title-nav">บทที่ 8: สรุปสูตรและแนวข้อสอบ 10 ข้อ</div>
+                <div class="card-desc-nav">ใบสรุปสูตรคำนวณทั้งหมดที่ต้องจำเข้าห้องสอบ พร้อมโจทย์ข้อสอบจำลองจริง 10 ข้อพร้อมวิธีทำทีละสเต็ป</div>
+            </div>
+            <div class="card-btn-nav">
+                คลิกเริ่มอ่านบทนี้ <span>➡️</span>
+            </div>
+        </div>
+    
+        </div>
+    </div>
+    <div class="chapter-nav-bar" style="justify-content: flex-end;">
+        <button type="button" class="nav-btn next-btn" onclick="showChapter('chapter1');">
+            <div class="nav-text" style="text-align: right;">
+                <span class="nav-label">เริ่มต้นอ่านบทแรก</span>
+                <span class="nav-title">บทที่ 1: Basic Circuit 1 ⚡</span>
+            </div>
+            <span class="nav-arrow">➡️</span>
+        </button>
+    </div>
+</section>
 
-        <!-- Chapter 1 -->
-        
-    <section id="chapter1" class="chapter-card">
+<section id="chapter1" class="chapter-card chapter-content">
         <div class="chapter-header">
             <span class="chapter-badge">บทที่ 1</span>
             <h2>การวิเคราะห์วงจรไฟฟ้าพื้นฐาน ตอนที่ 1 (Basic Circuit Analysis Part 1)</h2>
@@ -1010,12 +1260,31 @@
             </div>
 
         </div>
-    </section>
     
-
-        <!-- Chapter 2 -->
+    <div class="chapter-nav-bar">
         
-    <section id="chapter2" class="chapter-card">
+        <button type="button" class="nav-btn prev-btn" onclick="showChapter('overview');">
+            <span class="nav-arrow">⬅️</span>
+            <div class="nav-text">
+                <span class="nav-label">บทก่อนหน้า</span>
+                <span class="nav-title">📌 ข้อมูลภาพรวมวิชา</span>
+            </div>
+        </button>
+        
+        
+        <button type="button" class="nav-btn next-btn" onclick="showChapter('chapter2');">
+            <div class="nav-text" style="text-align: right;">
+                <span class="nav-label">บทถัดไป</span>
+                <span class="nav-title">บทที่ 2: Basic Circuit 2 🔄</span>
+            </div>
+            <span class="nav-arrow">➡️</span>
+        </button>
+        
+    </div>
+    
+</section>
+
+<section id="chapter2" class="chapter-card chapter-content">
         <div class="chapter-header">
             <span class="chapter-badge">บทที่ 2</span>
             <h2>การวิเคราะห์วงจรไฟฟ้าพื้นฐาน ตอนที่ 2 (Basic Circuit Analysis Part 2)</h2>
@@ -1228,12 +1497,31 @@
     
 
         </div>
-    </section>
     
-
-        <!-- Chapter 3 -->
+    <div class="chapter-nav-bar">
         
-    <section id="chapter3" class="chapter-card">
+        <button type="button" class="nav-btn prev-btn" onclick="showChapter('chapter1');">
+            <span class="nav-arrow">⬅️</span>
+            <div class="nav-text">
+                <span class="nav-label">บทก่อนหน้า</span>
+                <span class="nav-title">⬅️ บทที่ 1: Basic Circuit 1</span>
+            </div>
+        </button>
+        
+        
+        <button type="button" class="nav-btn next-btn" onclick="showChapter('chapter3');">
+            <div class="nav-text" style="text-align: right;">
+                <span class="nav-label">บทถัดไป</span>
+                <span class="nav-title">บทที่ 3: Microcontroller 💻</span>
+            </div>
+            <span class="nav-arrow">➡️</span>
+        </button>
+        
+    </div>
+    
+</section>
+
+<section id="chapter3" class="chapter-card chapter-content">
         <div class="chapter-header">
             <span class="chapter-badge">บทที่ 3</span>
             <h2>สถาปัตยกรรมไมโครคอนโทรลเลอร์และการเขียนโปรแกรม Arduino เบื้องต้น</h2>
@@ -1486,8 +1774,11 @@
             <div class="info-box">
                 <h4>วิวัฒนาการของการพัฒนาโปรแกรม: จากอดีตสู่ IDE</h4>
                 <p>
-                    <strong>ในอดีต:</strong> ผู้พัฒนาต้องเขียนภาษาแอสเซมบลี (.asm) หรือ C $ightarrow$ ใช้โปรแกรมภายนอกคอมไพล์เป็นไฟล์ฐานสิบหก (.hex) 
-                    $ightarrow$ ต่อบอร์ดผ่านเครื่องเบิร์นไอซี (Flash Programmer) $ightarrow$ เปิดโปรแกรม HyperTerminal เพื่อดูผลลัพธ์ผ่าน Serial 
+                    <strong>ในอดีต:</strong> ผู้พัฒนาต้องเขียนภาษาแอสเซมบลี (.asm) หรือ C $
+ightarrow$ ใช้โปรแกรมภายนอกคอมไพล์เป็นไฟล์ฐานสิบหก (.hex) 
+                    $
+ightarrow$ ต่อบอร์ดผ่านเครื่องเบิร์นไอซี (Flash Programmer) $
+ightarrow$ เปิดโปรแกรม HyperTerminal เพื่อดูผลลัพธ์ผ่าน Serial 
                     ซึ่งยุ่งยากและเสียเวลาอย่างมาก
                 </p>
                 <p>
@@ -1619,12 +1910,31 @@ void loop() {
             <div class="img-placeholder"><strong>[ภาพประกอบ: โครงสร้างของ 7-Segment Display: แสดงตำแหน่งเซกเมนต์ a ถึง g และการต่อแบบ Common Cathode / Common Anode]</strong></div>
 
         </div>
-    </section>
     
-
-        <!-- Chapter 4 -->
+    <div class="chapter-nav-bar">
         
-    <section id="chapter4" class="chapter-card">
+        <button type="button" class="nav-btn prev-btn" onclick="showChapter('chapter2');">
+            <span class="nav-arrow">⬅️</span>
+            <div class="nav-text">
+                <span class="nav-label">บทก่อนหน้า</span>
+                <span class="nav-title">⬅️ บทที่ 2: Basic Circuit 2</span>
+            </div>
+        </button>
+        
+        
+        <button type="button" class="nav-btn next-btn" onclick="showChapter('chapter4');">
+            <div class="nav-text" style="text-align: right;">
+                <span class="nav-label">บทถัดไป</span>
+                <span class="nav-title">บทที่ 4: Signals & PWM 🎛️</span>
+            </div>
+            <span class="nav-arrow">➡️</span>
+        </button>
+        
+    </div>
+    
+</section>
+
+<section id="chapter4" class="chapter-card chapter-content">
         <div class="chapter-header">
             <span class="chapter-badge">บทที่ 4</span>
             <h2>สัญญาณ, อินพุตดิจิทัล, PWM และตัวแปลงสัญญาณอนาล็อกเป็นดิจิทัล (ADC)</h2>
@@ -1671,8 +1981,10 @@ void loop() {
                 ต่อตัวต้านทานขนาด $10\text{ k}\Omega$ เชื่อมระหว่างขาอินพุตกับไฟเลี้ยง $V_{cc}$ ($5\text{ V}$) และต่อสวิตช์ลงกราวด์ ($GND$):
             </p>
             <ul>
-                <li><strong>เมื่อไม่กดสวิตช์:</strong> กระแสไหลผ่านตัวต้านทานดึงขาอินพุตไปที่ $V_{cc}$ $ightarrow$ ขาอ่านได้ <strong>HIGH ($1$)</strong></li>
-                <li><strong>เมื่อกดสวิตช์:</strong> ขาอินพุตลัดวงจรลงกราวด์ $ightarrow$ ขาอ่านได้ <strong>LOW ($0$)</strong></li>
+                <li><strong>เมื่อไม่กดสวิตช์:</strong> กระแสไหลผ่านตัวต้านทานดึงขาอินพุตไปที่ $V_{cc}$ $
+ightarrow$ ขาอ่านได้ <strong>HIGH ($1$)</strong></li>
+                <li><strong>เมื่อกดสวิตช์:</strong> ขาอินพุตลัดวงจรลงกราวด์ $
+ightarrow$ ขาอ่านได้ <strong>LOW ($0$)</strong></li>
                 <li>การทำงานในลักษณะนี้เรียกว่า <strong>Active LOW</strong> (สถานะทำงานเมื่อสัญญาณเป็น LOW)</li>
             </ul>
 
@@ -1683,8 +1995,10 @@ void loop() {
                 ต่อตัวต้านทานขนาด $10\text{ k}\Omega$ เชื่อมระหว่างขาอินพุตกับกราวด์ ($GND$) และต่อสวิตช์เข้ากับไฟเลี้ยง $V_{cc}$ ($5\text{ V}$):
             </p>
             <ul>
-                <li><strong>เมื่อไม่กดสวิตช์:</strong> ตัวต้านทานดึงขาลงกราวด์ $ightarrow$ ขาอ่านได้ <strong>LOW ($0$)</strong></li>
-                <li><strong>เมื่อกดสวิตช์:</strong> ขาเชื่อมต่อกับ $V_{cc}$ โดยตรง $ightarrow$ ขาอ่านได้ <strong>HIGH ($1$)</strong></li>
+                <li><strong>เมื่อไม่กดสวิตช์:</strong> ตัวต้านทานดึงขาลงกราวด์ $
+ightarrow$ ขาอ่านได้ <strong>LOW ($0$)</strong></li>
+                <li><strong>เมื่อกดสวิตช์:</strong> ขาเชื่อมต่อกับ $V_{cc}$ โดยตรง $
+ightarrow$ ขาอ่านได้ <strong>HIGH ($1$)</strong></li>
                 <li>การทำงานในลักษณะนี้เรียกว่า <strong>Active HIGH</strong> (สถานะทำงานเมื่อสัญญาณเป็น HIGH)</li>
             </ul>
 
@@ -1785,11 +2099,16 @@ void loop() {
                 คำสั่งที่ใช้ควบคุมคือ <code>analogWrite(pin, value);</code> โดยมีค่า <strong>Resolution เท่ากับ 8 บิต</strong> ($2^8 = 256$ ระดับ คือ $0$ ถึง $255$):
             </p>
             <ul>
-                <li><code>analogWrite(pin, 0);</code> $ightarrow$ Duty Cycle 0% $\Longrightarrow V_{avg} = 0\text{ V}$ (ไฟดับสนิท)</li>
-                <li><code>analogWrite(pin, 64);</code> $ightarrow$ Duty Cycle 25% $\Longrightarrow V_{avg} = 1.25\text{ V}$ (ความสว่าง 25%)</li>
-                <li><code>analogWrite(pin, 127);</code> $ightarrow$ Duty Cycle 50% $\Longrightarrow V_{avg} = 2.5\text{ V}$ (ความสว่างครึ่งหนึ่ง)</li>
-                <li><code>analogWrite(pin, 191);</code> $ightarrow$ Duty Cycle 75% $\Longrightarrow V_{avg} = 3.75\text{ V}$ (ความสว่าง 75%)</li>
-                <li><code>analogWrite(pin, 255);</code> $ightarrow$ Duty Cycle 100% $\Longrightarrow V_{avg} = 5.0\text{ V}$ (ความสว่างเต็มที่)</li>
+                <li><code>analogWrite(pin, 0);</code> $
+ightarrow$ Duty Cycle 0% $\Longrightarrow V_{avg} = 0\text{ V}$ (ไฟดับสนิท)</li>
+                <li><code>analogWrite(pin, 64);</code> $
+ightarrow$ Duty Cycle 25% $\Longrightarrow V_{avg} = 1.25\text{ V}$ (ความสว่าง 25%)</li>
+                <li><code>analogWrite(pin, 127);</code> $
+ightarrow$ Duty Cycle 50% $\Longrightarrow V_{avg} = 2.5\text{ V}$ (ความสว่างครึ่งหนึ่ง)</li>
+                <li><code>analogWrite(pin, 191);</code> $
+ightarrow$ Duty Cycle 75% $\Longrightarrow V_{avg} = 3.75\text{ V}$ (ความสว่าง 75%)</li>
+                <li><code>analogWrite(pin, 255);</code> $
+ightarrow$ Duty Cycle 100% $\Longrightarrow V_{avg} = 5.0\text{ V}$ (ความสว่างเต็มที่)</li>
             </ul>
 
             
@@ -1926,12 +2245,31 @@ void loop() {
             </div>
 
         </div>
-    </section>
     
-
-        <!-- Chapter 5 -->
+    <div class="chapter-nav-bar">
         
-    <section id="chapter5" class="chapter-card">
+        <button type="button" class="nav-btn prev-btn" onclick="showChapter('chapter3');">
+            <span class="nav-arrow">⬅️</span>
+            <div class="nav-text">
+                <span class="nav-label">บทก่อนหน้า</span>
+                <span class="nav-title">⬅️ บทที่ 3: Microcontroller 1</span>
+            </div>
+        </button>
+        
+        
+        <button type="button" class="nav-btn next-btn" onclick="showChapter('chapter5');">
+            <div class="nav-text" style="text-align: right;">
+                <span class="nav-label">บทถัดไป</span>
+                <span class="nav-title">บทที่ 5: Sensors & I2C 🌡️</span>
+            </div>
+            <span class="nav-arrow">➡️</span>
+        </button>
+        
+    </div>
+    
+</section>
+
+<section id="chapter5" class="chapter-card chapter-content">
         <div class="chapter-header">
             <span class="chapter-badge">บทที่ 5</span>
             <h2>เซนเซอร์, บัสสื่อสาร I2C, จอ LCD และตัวกระตุ้น (Actuators)</h2>
@@ -1956,12 +2294,17 @@ void loop() {
                         <tr>
                             <td><strong>Sensor (เซนเซอร์)</strong></td>
                             <td>มาจากคำว่า <strong>"Sense" (ตรวจจับ / รับรู้)</strong> หมายถึง อุปกรณ์ที่ใช้ตรวจวัดปริมาณหรือปรากฏการณ์ทางกายภาพ แล้วให้ผลตอบสนองออกมาเป็นปริมาณอย่างใดอย่างหนึ่ง</td>
-                            <td><strong>Thermistor:</strong> ตรวจจับอุณหภูมิ $ightarrow$ เปลี่ยนเป็นค่าความต้านทาน<br/><strong>LDR:</strong> ตรวจจับแสง $ightarrow$ เปลี่ยนเป็นค่าความต้านทาน</td>
+                            <td><strong>Thermistor:</strong> ตรวจจับอุณหภูมิ $
+ightarrow$ เปลี่ยนเป็นค่าความต้านทาน<br/><strong>LDR:</strong> ตรวจจับแสง $
+ightarrow$ เปลี่ยนเป็นค่าความต้านทาน</td>
                         </tr>
                         <tr>
                             <td><strong>Transducer (ทรานสดิวเซอร์)</strong></td>
                             <td>มาจากคำว่า <strong>"Transform" (แปลงพลังงาน)</strong> หมายถึง อุปกรณ์ที่ทำหน้าที่ <strong>แปลงพลังงานจากรูปแบบหนึ่งไปสู่อีกรูปแบบหนึ่ง</strong> (โดยทั่วไปคือแปลงพลังงานทางกายภาพไปเป็นพลังงานไฟฟ้า หรือในทางกลับกัน)</td>
-                            <td><strong>Microphone:</strong> แปลงพลังงานเสียง $ightarrow$ สัญญาณไฟฟ้า<br/><strong>Speaker:</strong> แปลงสัญญาณไฟฟ้า $ightarrow$ คลื่นเสียงกลไก<br/><strong>Solar Cell:</strong> แปลงพลังงานแสง $ightarrow$ ไฟฟ้า</td>
+                            <td><strong>Microphone:</strong> แปลงพลังงานเสียง $
+ightarrow$ สัญญาณไฟฟ้า<br/><strong>Speaker:</strong> แปลงสัญญาณไฟฟ้า $
+ightarrow$ คลื่นเสียงกลไก<br/><strong>Solar Cell:</strong> แปลงพลังงานแสง $
+ightarrow$ ไฟฟ้า</td>
                         </tr>
                     </tbody>
                 </table>
@@ -2005,8 +2348,10 @@ void loop() {
                 <strong>Thermistor (เทอร์มิสเตอร์)</strong> เป็นตัวต้านทานที่ค่าความต้านทานเปลี่ยนแปลงตามอุณหภูมิ แบ่งออกเป็น 2 ประเภทหลัก:
             </p>
             <ul>
-                <li><strong>NTC (Negative Temperature Coefficient):</strong> สัมประสิทธิ์อุณหภูมิติดลบ $ightarrow$ <strong>เมื่ออุณหภูมิสูงขึ้น ค่าความต้านทานจะลดลง</strong> (นิยมใช้เป็นเซนเซอร์วัดอุณหภูมิมากที่สุด)</li>
-                <li><strong>PTC (Positive Temperature Coefficient):</strong> สัมประสิทธิ์อุณหภูมิเป็นบวก $ightarrow$ <strong>เมื่ออุณหภูมิสูงขึ้น ค่าความต้านทานจะเพิ่มขึ้น</strong> (มักใช้เป็นสวิตช์ตัดวงจรป้องกันกระแสเกิน หรือฟิวส์รีเซ็ตตัวเอง)</li>
+                <li><strong>NTC (Negative Temperature Coefficient):</strong> สัมประสิทธิ์อุณหภูมิติดลบ $
+ightarrow$ <strong>เมื่ออุณหภูมิสูงขึ้น ค่าความต้านทานจะลดลง</strong> (นิยมใช้เป็นเซนเซอร์วัดอุณหภูมิมากที่สุด)</li>
+                <li><strong>PTC (Positive Temperature Coefficient):</strong> สัมประสิทธิ์อุณหภูมิเป็นบวก $
+ightarrow$ <strong>เมื่ออุณหภูมิสูงขึ้น ค่าความต้านทานจะเพิ่มขึ้น</strong> (มักใช้เป็นสวิตช์ตัดวงจรป้องกันกระแสเกิน หรือฟิวส์รีเซ็ตตัวเอง)</li>
             </ul>
 
             
@@ -2020,7 +2365,9 @@ void loop() {
                 <h4>สมการค่าเบต้าของเทอร์มิสเตอร์ (Thermistor Beta Equation)</h4>
                 <p>ความสัมพันธ์ระหว่างค่าความต้านทาน $R_T$ กับอุณหภูมิสัมบูรณ์ $T$ (หน่วย Kelvin: $K = ^\circ\text{C} + 273.15$):</p>
                 <div class="formula-main">
-                    $$R_T = R_0 \cdot e^{B \left( \frac{1}{T} - \frac{1}{T_0} ight)} \quad \Longleftrightarrow \quad \frac{1}{T} = \frac{1}{T_0} + \frac{1}{B} \ln\left(\frac{R_T}{R_0}ight)$$
+                    $$R_T = R_0 \cdot e^{B \left( \frac{1}{T} - \frac{1}{T_0} 
+ight)} \quad \Longleftrightarrow \quad \frac{1}{T} = \frac{1}{T_0} + \frac{1}{B} \ln\left(\frac{R_T}{R_0}
+ight)$$
                 </div>
                 <ul>
                     <li>$T_0$: อุณหภูมิอ้างอิงมาตรฐาน ($25^\circ\text{C} = 298.15\text{ K}$)</li>
@@ -2215,9 +2562,12 @@ void setup() {
                     ภายในประกอบด้วย DC Motor, ชุดเกียร์ทดรอบ, โพเทนชิโอมิเตอร์ตรวจจับมุม และวงจรควบคุมเปรียบเทียบข้อผิดพลาด 
                     ควบคุมด้วยสัญญาณพัลส์ความถี่ $50\text{ Hz}$ (คาบ $20\text{ ms}$):
                     <ul>
-                        <li>พัลส์กว้าง <strong>$1.0\text{ ms}$</strong> $ightarrow$ เคลื่อนที่ไปที่มุม <strong>$0^\circ$</strong></li>
-                        <li>พัลส์กว้าง <strong>$1.5\text{ ms}$</strong> $ightarrow$ เคลื่อนที่ไปที่มุม <strong>$90^\circ$ (ตำแหน่งกลาง)</strong></li>
-                        <li>พัลส์กว้าง <strong>$2.0\text{ ms}$</strong> $ightarrow$ เคลื่อนที่ไปที่มุม <strong>$180^\circ$</strong></li>
+                        <li>พัลส์กว้าง <strong>$1.0\text{ ms}$</strong> $
+ightarrow$ เคลื่อนที่ไปที่มุม <strong>$0^\circ$</strong></li>
+                        <li>พัลส์กว้าง <strong>$1.5\text{ ms}$</strong> $
+ightarrow$ เคลื่อนที่ไปที่มุม <strong>$90^\circ$ (ตำแหน่งกลาง)</strong></li>
+                        <li>พัลส์กว้าง <strong>$2.0\text{ ms}$</strong> $
+ightarrow$ เคลื่อนที่ไปที่มุม <strong>$180^\circ$</strong></li>
                     </ul>
                 </li>
                 <li>
@@ -2228,12 +2578,31 @@ void setup() {
             </ul>
 
         </div>
-    </section>
     
-
-        <!-- Chapter 6 -->
+    <div class="chapter-nav-bar">
         
-    <section id="chapter6" class="chapter-card">
+        <button type="button" class="nav-btn prev-btn" onclick="showChapter('chapter4');">
+            <span class="nav-arrow">⬅️</span>
+            <div class="nav-text">
+                <span class="nav-label">บทก่อนหน้า</span>
+                <span class="nav-title">⬅️ บทที่ 4: Signals, PWM & ADC</span>
+            </div>
+        </button>
+        
+        
+        <button type="button" class="nav-btn next-btn" onclick="showChapter('chapter6');">
+            <div class="nav-text" style="text-align: right;">
+                <span class="nav-label">บทถัดไป</span>
+                <span class="nav-title">บทที่ 6: IoT & MQTT 🌐</span>
+            </div>
+            <span class="nav-arrow">➡️</span>
+        </button>
+        
+    </div>
+    
+</section>
+
+<section id="chapter6" class="chapter-card chapter-content">
         <div class="chapter-header">
             <span class="chapter-badge">บทที่ 6</span>
             <h2>อินเทอร์เน็ตของสรรพสิ่ง (IoT), โปรโตคอล MQTT และการควบคุมผ่านเว็บ</h2>
@@ -2425,7 +2794,10 @@ void setup() {
                             <td>
                                 ระดับปลอดภัยสูงสุด <strong>รับประกันว่าข้อความถึงผู้รับอย่างถูกต้อง และมีเพียงชุดเดียวแน่นอน</strong> 
                                 ไม่มีการสูญหายและไม่มีการส่งซ้ำ ผ่านขั้นตอน Handshake 4 จังหวะ: 
-                                <code>PUBLISH</code> $ightarrow$ <code>PUBREC</code> $ightarrow$ <code>PUBREL</code> $ightarrow$ <code>PUBCOMP</code>
+                                <code>PUBLISH</code> $
+ightarrow$ <code>PUBREC</code> $
+ightarrow$ <code>PUBREL</code> $
+ightarrow$ <code>PUBCOMP</code>
                             </td>
                             <td>ระบบทำธุรกรรมการเงิน, การหักเงิน IoT, ระบบเปิด-ปิดสวิตช์เครื่องจักรสำคัญที่ห้ามผิดพลาด</td>
                         </tr>
@@ -2542,7 +2914,9 @@ void setup() {
                 <li><strong>การเชื่อมต่อ WiFi:</strong> ใช้ Library <code>WiFiS3</code> เชื่อมต่อเข้ากับ Access Point / Mobile Hotspot ด้วย SSID และ Password</li>
                 <li><strong>การเชื่อมต่อ MQTT:</strong> ใช้ Library <code>MQTTClient (256dpi)</code> ประกาศ <code>WiFiClient network; MQTTClient client;</code></li>
                 <li><strong>Lab 3 (Telemetry):</strong> บอร์ดอ่านค่าจากตัวต้านทานปรับค่าได้ (Potentiometer) ด้วย <code>analogRead(A0)</code> แล้วใช้คำสั่ง <code>client.publish("topic/analog", String(val));</code> ส่งค่าขึ้น Broker ทุก 1 วินาที หน้าเว็บที่ Subscribe ไว้จะแสดงตัวเลขและกราฟทันที</li>
-                <li><strong>Lab 5 (Cloud Actuator Control):</strong> ผู้ใช้ปรับค่าบนหน้าเว็บ $ightarrow$ เว็บ Publish ค่าความสว่าง ($0-255$) $ightarrow$ บอร์ด Subscribe ในฟังก์ชัน <code>messageReceived()</code> นำค่าที่ได้รับไปสั่ง <code>analogWrite(ledPin, val)</code> เพื่อหรี่ไฟ LED จากระยะไกลผ่านอินเทอร์เน็ต!</li>
+                <li><strong>Lab 5 (Cloud Actuator Control):</strong> ผู้ใช้ปรับค่าบนหน้าเว็บ $
+ightarrow$ เว็บ Publish ค่าความสว่าง ($0-255$) $
+ightarrow$ บอร์ด Subscribe ในฟังก์ชัน <code>messageReceived()</code> นำค่าที่ได้รับไปสั่ง <code>analogWrite(ledPin, val)</code> เพื่อหรี่ไฟ LED จากระยะไกลผ่านอินเทอร์เน็ต!</li>
             </ul>
 
             
@@ -2576,12 +2950,31 @@ void setup() {
     
 
         </div>
-    </section>
     
-
-        <!-- Chapter 7 -->
+    <div class="chapter-nav-bar">
         
-    <section id="chapter7" class="chapter-card">
+        <button type="button" class="nav-btn prev-btn" onclick="showChapter('chapter5');">
+            <span class="nav-arrow">⬅️</span>
+            <div class="nav-text">
+                <span class="nav-label">บทก่อนหน้า</span>
+                <span class="nav-title">⬅️ บทที่ 5: Sensors, I2C & Actuators</span>
+            </div>
+        </button>
+        
+        
+        <button type="button" class="nav-btn next-btn" onclick="showChapter('chapter7');">
+            <div class="nav-text" style="text-align: right;">
+                <span class="nav-label">บทถัดไป</span>
+                <span class="nav-title">บทที่ 7: พจนานุกรมคำย่อ 📖</span>
+            </div>
+            <span class="nav-arrow">➡️</span>
+        </button>
+        
+    </div>
+    
+</section>
+
+<section id="chapter7" class="chapter-card chapter-content">
         <div class="chapter-header">
             <span class="chapter-badge">บทที่ 7</span>
             <h2>พจนานุกรมและสารบัญคำย่อทั้งหมดในรายวิชา (Master Glossary of Acronyms)</h2>
@@ -2975,12 +3368,31 @@ void setup() {
                 </table>
             </div>
         </div>
-    </section>
     
-
-        <!-- Chapter 8 -->
+    <div class="chapter-nav-bar">
         
-    <section id="chapter8" class="chapter-card">
+        <button type="button" class="nav-btn prev-btn" onclick="showChapter('chapter6');">
+            <span class="nav-arrow">⬅️</span>
+            <div class="nav-text">
+                <span class="nav-label">บทก่อนหน้า</span>
+                <span class="nav-title">⬅️ บทที่ 6: IoT, MQTT & WebSocket</span>
+            </div>
+        </button>
+        
+        
+        <button type="button" class="nav-btn next-btn" onclick="showChapter('chapter8');">
+            <div class="nav-text" style="text-align: right;">
+                <span class="nav-label">บทถัดไป</span>
+                <span class="nav-title">บทที่ 8: สรุปสูตรและแนวข้อสอบ 📝</span>
+            </div>
+            <span class="nav-arrow">➡️</span>
+        </button>
+        
+    </div>
+    
+</section>
+
+<section id="chapter8" class="chapter-card chapter-content">
         <div class="chapter-header">
             <span class="chapter-badge">บทที่ 8</span>
             <h2>ใบสรุปสูตรและแนวข้อสอบจำลองเตรียมสอบจริง (Exam Cheat Sheet & Practice)</h2>
@@ -3054,7 +3466,8 @@ void setup() {
                         <tr>
                             <td><strong>สมการเทอร์มิสเตอร์ (Beta Equation)</strong></td>
                             <td>
-                                $$\frac{1}{T} = \frac{1}{T_0} + \frac{1}{B} \ln\left(\frac{R_T}{R_0}ight)$$
+                                $$\frac{1}{T} = \frac{1}{T_0} + \frac{1}{B} \ln\left(\frac{R_T}{R_0}
+ight)$$
                             </td>
                             <td>$T, T_0$: อุณหภูมิสัมบูรณ์ (Kelvin: $K = ^\circ\text{C} + 273.15$)<br/>$R_0$: ความต้านทานที่ $T_0$ ($25^\circ\text{C}$)<br/>$B$: ค่าสัมประสิทธิ์ Beta (K)</td>
                         </tr>
@@ -3064,7 +3477,9 @@ void setup() {
                                 $$V_{out} = (0.01 \times T_A) + 0.5\text{ V}$$
                                 $$T_A = (V_{out} - 0.5) \times 100$$
                             </td>
-                            <td>ความไว $10\text{ mV}/^\circ\text{C}$<br/>ที่ $0^\circ\text{C} ightarrow 0.5\text{ V}$<br/>ที่ $50^\circ\text{C} ightarrow 1.0\text{ V}$</td>
+                            <td>ความไว $10\text{ mV}/^\circ\text{C}$<br/>ที่ $0^\circ\text{C} 
+ightarrow 0.5\text{ V}$<br/>ที่ $50^\circ\text{C} 
+ightarrow 1.0\text{ V}$</td>
                         </tr>
                         <tr>
                             <td><strong>เซนเซอร์ระยะทาง HC-SR04</strong></td>
@@ -3246,7 +3661,29 @@ void setup() {
             </div>
 
         </div>
-    </section>
+    
+    <div class="chapter-nav-bar">
+        
+        <button type="button" class="nav-btn prev-btn" onclick="showChapter('chapter7');">
+            <span class="nav-arrow">⬅️</span>
+            <div class="nav-text">
+                <span class="nav-label">บทก่อนหน้า</span>
+                <span class="nav-title">⬅️ บทที่ 7: พจนานุกรมคำย่อ</span>
+            </div>
+        </button>
+        
+        
+        <button type="button" class="nav-btn next-btn" onclick="showChapter('overview');">
+            <div class="nav-text" style="text-align: right;">
+                <span class="nav-label">บทถัดไป</span>
+                <span class="nav-title">กลับสู่หน้าภาพรวมวิชา 🏠</span>
+            </div>
+            <span class="nav-arrow">➡️</span>
+        </button>
+        
+    </div>
+    
+</section>
     
 
         <!-- Footer -->
@@ -3258,9 +3695,31 @@ void setup() {
 </div>
 
 <!-- Strict Click-Lock Sidebar Script -->
+
 <script>
-    // Strict locking: Active tab changes ONLY on user click, NEVER on scroll!
-    function setActiveLink(targetId) {
+    // Chapter SPA Management
+    function showChapter(targetId) {
+        if (!targetId) targetId = 'overview';
+
+        // 1. Show target section, hide all other chapter-content sections
+        const allSections = document.querySelectorAll('.chapter-content');
+        let found = false;
+        allSections.forEach(function(sec) {
+            if (sec.id === targetId) {
+                sec.classList.add('active');
+                found = true;
+            } else {
+                sec.classList.remove('active');
+            }
+        });
+
+        if (!found) {
+            const ov = document.getElementById('overview');
+            if (ov) ov.classList.add('active');
+            targetId = 'overview';
+        }
+
+        // 2. Update active link in sidebar
         document.querySelectorAll('.toc-link').forEach(function(link) {
             if (link.getAttribute('data-target') === targetId) {
                 link.classList.add('active');
@@ -3268,28 +3727,45 @@ void setup() {
                 link.classList.remove('active');
             }
         });
-    }
 
-    function onSidebarClick(targetId) {
-        setActiveLink(targetId);
-        // Let standard hash navigation or smooth scroll take over
-    }
+        // 3. Update hash in browser URL without jump
+        if (history.pushState) {
+            history.pushState(null, null, '#' + targetId);
+        } else {
+            location.hash = '#' + targetId;
+        }
 
-    function scrollToChapter(targetId) {
-        const el = document.getElementById(targetId);
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
+        // 4. Scroll smoothly to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // 5. Trigger KaTeX render on active chapter if needed
+        if (typeof renderMathInElement !== 'undefined') {
+            const activeSec = document.getElementById(targetId);
+            if (activeSec) {
+                renderMathInElement(activeSec, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "$", right: "$", display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
         }
     }
 
-    // Check hash on load
+    // Handle browser Back / Forward buttons
+    window.addEventListener('popstate', function() {
+        let hash = window.location.hash.replace('#', '') || 'overview';
+        showChapter(hash);
+    });
+
+    // Initial load check
     window.addEventListener('DOMContentLoaded', function() {
-        let hash = window.location.hash.replace('#', '');
-        if (hash) {
-            setActiveLink(hash);
-        }
+        let hash = window.location.hash.replace('#', '') || 'overview';
+        showChapter(hash);
     });
 </script>
+
 
 </body>
 </html>
