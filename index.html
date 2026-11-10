@@ -1774,11 +1774,8 @@
             <div class="info-box">
                 <h4>วิวัฒนาการของการพัฒนาโปรแกรม: จากอดีตสู่ IDE</h4>
                 <p>
-                    <strong>ในอดีต:</strong> ผู้พัฒนาต้องเขียนภาษาแอสเซมบลี (.asm) หรือ C $
-ightarrow$ ใช้โปรแกรมภายนอกคอมไพล์เป็นไฟล์ฐานสิบหก (.hex) 
-                    $
-ightarrow$ ต่อบอร์ดผ่านเครื่องเบิร์นไอซี (Flash Programmer) $
-ightarrow$ เปิดโปรแกรม HyperTerminal เพื่อดูผลลัพธ์ผ่าน Serial 
+                    <strong>ในอดีต:</strong> ผู้พัฒนาต้องเขียนภาษาแอสเซมบลี (.asm) หรือ C $\rightarrow$ ใช้โปรแกรมภายนอกคอมไพล์เป็นไฟล์ฐานสิบหก (.hex) 
+                    $\rightarrow$ ต่อบอร์ดผ่านเครื่องเบิร์นไอซี (Flash Programmer) $\rightarrow$ เปิดโปรแกรม HyperTerminal เพื่อดูผลลัพธ์ผ่าน Serial 
                     ซึ่งยุ่งยากและเสียเวลาอย่างมาก
                 </p>
                 <p>
@@ -1988,10 +1985,8 @@ void loop() {
                 ต่อตัวต้านทานขนาด $10\text{ k}\Omega$ เชื่อมระหว่างขาอินพุตกับไฟเลี้ยง $V_{cc}$ ($5\text{ V}$) และต่อสวิตช์ลงกราวด์ ($GND$):
             </p>
             <ul>
-                <li><strong>เมื่อไม่กดสวิตช์:</strong> กระแสไหลผ่านตัวต้านทานดึงขาอินพุตไปที่ $V_{cc}$ $
-ightarrow$ ขาอ่านได้ <strong>HIGH ($1$)</strong></li>
-                <li><strong>เมื่อกดสวิตช์:</strong> ขาอินพุตลัดวงจรลงกราวด์ $
-ightarrow$ ขาอ่านได้ <strong>LOW ($0$)</strong></li>
+                <li><strong>เมื่อไม่กดสวิตช์:</strong> กระแสไหลผ่านตัวต้านทานดึงขาอินพุตไปที่ $V_{cc}$ $\rightarrow$ ขาอ่านได้ <strong>HIGH ($1$)</strong></li>
+                <li><strong>เมื่อกดสวิตช์:</strong> ขาอินพุตลัดวงจรลงกราวด์ $\rightarrow$ ขาอ่านได้ <strong>LOW ($0$)</strong></li>
                 <li>การทำงานในลักษณะนี้เรียกว่า <strong>Active LOW</strong> (สถานะทำงานเมื่อสัญญาณเป็น LOW)</li>
             </ul>
 
@@ -2009,10 +2004,8 @@ ightarrow$ ขาอ่านได้ <strong>LOW ($0$)</strong></li>
                 ต่อตัวต้านทานขนาด $10\text{ k}\Omega$ เชื่อมระหว่างขาอินพุตกับกราวด์ ($GND$) และต่อสวิตช์เข้ากับไฟเลี้ยง $V_{cc}$ ($5\text{ V}$):
             </p>
             <ul>
-                <li><strong>เมื่อไม่กดสวิตช์:</strong> ตัวต้านทานดึงขาลงกราวด์ $
-ightarrow$ ขาอ่านได้ <strong>LOW ($0$)</strong></li>
-                <li><strong>เมื่อกดสวิตช์:</strong> ขาเชื่อมต่อกับ $V_{cc}$ โดยตรง $
-ightarrow$ ขาอ่านได้ <strong>HIGH ($1$)</strong></li>
+                <li><strong>เมื่อไม่กดสวิตช์:</strong> ตัวต้านทานดึงขาลงกราวด์ $\rightarrow$ ขาอ่านได้ <strong>LOW ($0$)</strong></li>
+                <li><strong>เมื่อกดสวิตช์:</strong> ขาเชื่อมต่อกับ $V_{cc}$ โดยตรง $\rightarrow$ ขาอ่านได้ <strong>HIGH ($1$)</strong></li>
                 <li>การทำงานในลักษณะนี้เรียกว่า <strong>Active HIGH</strong> (สถานะทำงานเมื่อสัญญาณเป็น HIGH)</li>
             </ul>
 
@@ -2141,16 +2134,11 @@ ightarrow$ ขาอ่านได้ <strong>HIGH ($1$)</strong></li>
                 คำสั่งที่ใช้ควบคุมคือ <code>analogWrite(pin, value);</code> โดยมีค่า <strong>Resolution เท่ากับ 8 บิต</strong> ($2^8 = 256$ ระดับ คือ $0$ ถึง $255$):
             </p>
             <ul>
-                <li><code>analogWrite(pin, 0);</code> $
-ightarrow$ Duty Cycle 0% $\Longrightarrow V_{avg} = 0\text{ V}$ (ไฟดับสนิท)</li>
-                <li><code>analogWrite(pin, 64);</code> $
-ightarrow$ Duty Cycle 25% $\Longrightarrow V_{avg} = 1.25\text{ V}$ (ความสว่าง 25%)</li>
-                <li><code>analogWrite(pin, 127);</code> $
-ightarrow$ Duty Cycle 50% $\Longrightarrow V_{avg} = 2.5\text{ V}$ (ความสว่างครึ่งหนึ่ง)</li>
-                <li><code>analogWrite(pin, 191);</code> $
-ightarrow$ Duty Cycle 75% $\Longrightarrow V_{avg} = 3.75\text{ V}$ (ความสว่าง 75%)</li>
-                <li><code>analogWrite(pin, 255);</code> $
-ightarrow$ Duty Cycle 100% $\Longrightarrow V_{avg} = 5.0\text{ V}$ (ความสว่างเต็มที่)</li>
+                <li><code>analogWrite(pin, 0);</code> $\rightarrow$ Duty Cycle 0% $\Longrightarrow V_{avg} = 0\text{ V}$ (ไฟดับสนิท)</li>
+                <li><code>analogWrite(pin, 64);</code> $\rightarrow$ Duty Cycle 25% $\Longrightarrow V_{avg} = 1.25\text{ V}$ (ความสว่าง 25%)</li>
+                <li><code>analogWrite(pin, 127);</code> $\rightarrow$ Duty Cycle 50% $\Longrightarrow V_{avg} = 2.5\text{ V}$ (ความสว่างครึ่งหนึ่ง)</li>
+                <li><code>analogWrite(pin, 191);</code> $\rightarrow$ Duty Cycle 75% $\Longrightarrow V_{avg} = 3.75\text{ V}$ (ความสว่าง 75%)</li>
+                <li><code>analogWrite(pin, 255);</code> $\rightarrow$ Duty Cycle 100% $\Longrightarrow V_{avg} = 5.0\text{ V}$ (ความสว่างเต็มที่)</li>
             </ul>
 
             
@@ -2336,17 +2324,12 @@ void loop() {
                         <tr>
                             <td><strong>Sensor (เซนเซอร์)</strong></td>
                             <td>มาจากคำว่า <strong>"Sense" (ตรวจจับ / รับรู้)</strong> หมายถึง อุปกรณ์ที่ใช้ตรวจวัดปริมาณหรือปรากฏการณ์ทางกายภาพ แล้วให้ผลตอบสนองออกมาเป็นปริมาณอย่างใดอย่างหนึ่ง</td>
-                            <td><strong>Thermistor:</strong> ตรวจจับอุณหภูมิ $
-ightarrow$ เปลี่ยนเป็นค่าความต้านทาน<br/><strong>LDR:</strong> ตรวจจับแสง $
-ightarrow$ เปลี่ยนเป็นค่าความต้านทาน</td>
+                            <td><strong>Thermistor:</strong> ตรวจจับอุณหภูมิ $\rightarrow$ เปลี่ยนเป็นค่าความต้านทาน<br/><strong>LDR:</strong> ตรวจจับแสง $\rightarrow$ เปลี่ยนเป็นค่าความต้านทาน</td>
                         </tr>
                         <tr>
                             <td><strong>Transducer (ทรานสดิวเซอร์)</strong></td>
                             <td>มาจากคำว่า <strong>"Transform" (แปลงพลังงาน)</strong> หมายถึง อุปกรณ์ที่ทำหน้าที่ <strong>แปลงพลังงานจากรูปแบบหนึ่งไปสู่อีกรูปแบบหนึ่ง</strong> (โดยทั่วไปคือแปลงพลังงานทางกายภาพไปเป็นพลังงานไฟฟ้า หรือในทางกลับกัน)</td>
-                            <td><strong>Microphone:</strong> แปลงพลังงานเสียง $
-ightarrow$ สัญญาณไฟฟ้า<br/><strong>Speaker:</strong> แปลงสัญญาณไฟฟ้า $
-ightarrow$ คลื่นเสียงกลไก<br/><strong>Solar Cell:</strong> แปลงพลังงานแสง $
-ightarrow$ ไฟฟ้า</td>
+                            <td><strong>Microphone:</strong> แปลงพลังงานเสียง $\rightarrow$ สัญญาณไฟฟ้า<br/><strong>Speaker:</strong> แปลงสัญญาณไฟฟ้า $\rightarrow$ คลื่นเสียงกลไก<br/><strong>Solar Cell:</strong> แปลงพลังงานแสง $\rightarrow$ ไฟฟ้า</td>
                         </tr>
                     </tbody>
                 </table>
@@ -2390,10 +2373,8 @@ ightarrow$ ไฟฟ้า</td>
                 <strong>Thermistor (เทอร์มิสเตอร์)</strong> เป็นตัวต้านทานที่ค่าความต้านทานเปลี่ยนแปลงตามอุณหภูมิ แบ่งออกเป็น 2 ประเภทหลัก:
             </p>
             <ul>
-                <li><strong>NTC (Negative Temperature Coefficient):</strong> สัมประสิทธิ์อุณหภูมิติดลบ $
-ightarrow$ <strong>เมื่ออุณหภูมิสูงขึ้น ค่าความต้านทานจะลดลง</strong> (นิยมใช้เป็นเซนเซอร์วัดอุณหภูมิมากที่สุด)</li>
-                <li><strong>PTC (Positive Temperature Coefficient):</strong> สัมประสิทธิ์อุณหภูมิเป็นบวก $
-ightarrow$ <strong>เมื่ออุณหภูมิสูงขึ้น ค่าความต้านทานจะเพิ่มขึ้น</strong> (มักใช้เป็นสวิตช์ตัดวงจรป้องกันกระแสเกิน หรือฟิวส์รีเซ็ตตัวเอง)</li>
+                <li><strong>NTC (Negative Temperature Coefficient):</strong> สัมประสิทธิ์อุณหภูมิติดลบ $\rightarrow$ <strong>เมื่ออุณหภูมิสูงขึ้น ค่าความต้านทานจะลดลง</strong> (นิยมใช้เป็นเซนเซอร์วัดอุณหภูมิมากที่สุด)</li>
+                <li><strong>PTC (Positive Temperature Coefficient):</strong> สัมประสิทธิ์อุณหภูมิเป็นบวก $\rightarrow$ <strong>เมื่ออุณหภูมิสูงขึ้น ค่าความต้านทานจะเพิ่มขึ้น</strong> (มักใช้เป็นสวิตช์ตัดวงจรป้องกันกระแสเกิน หรือฟิวส์รีเซ็ตตัวเอง)</li>
             </ul>
 
             
@@ -2407,9 +2388,7 @@ ightarrow$ <strong>เมื่ออุณหภูมิสูงขึ้น 
                 <h4>สมการค่าเบต้าของเทอร์มิสเตอร์ (Thermistor Beta Equation)</h4>
                 <p>ความสัมพันธ์ระหว่างค่าความต้านทาน $R_T$ กับอุณหภูมิสัมบูรณ์ $T$ (หน่วย Kelvin: $K = ^\circ\text{C} + 273.15$):</p>
                 <div class="formula-main">
-                    $$R_T = R_0 \cdot e^{B \left( \frac{1}{T} - \frac{1}{T_0} 
-ight)} \quad \Longleftrightarrow \quad \frac{1}{T} = \frac{1}{T_0} + \frac{1}{B} \ln\left(\frac{R_T}{R_0}
-ight)$$
+                    $$R_T = R_0 \cdot e^{B \left( \frac{1}{T} - \frac{1}{T_0} \right)} \quad \Longleftrightarrow \quad \frac{1}{T} = \frac{1}{T_0} + \frac{1}{B} \ln\left(\frac{R_T}{R_0}\right)$$
                 </div>
                 <ul>
                     <li>$T_0$: อุณหภูมิอ้างอิงมาตรฐาน ($25^\circ\text{C} = 298.15\text{ K}$)</li>
@@ -2604,12 +2583,9 @@ void setup() {
                     ภายในประกอบด้วย DC Motor, ชุดเกียร์ทดรอบ, โพเทนชิโอมิเตอร์ตรวจจับมุม และวงจรควบคุมเปรียบเทียบข้อผิดพลาด 
                     ควบคุมด้วยสัญญาณพัลส์ความถี่ $50\text{ Hz}$ (คาบ $20\text{ ms}$):
                     <ul>
-                        <li>พัลส์กว้าง <strong>$1.0\text{ ms}$</strong> $
-ightarrow$ เคลื่อนที่ไปที่มุม <strong>$0^\circ$</strong></li>
-                        <li>พัลส์กว้าง <strong>$1.5\text{ ms}$</strong> $
-ightarrow$ เคลื่อนที่ไปที่มุม <strong>$90^\circ$ (ตำแหน่งกลาง)</strong></li>
-                        <li>พัลส์กว้าง <strong>$2.0\text{ ms}$</strong> $
-ightarrow$ เคลื่อนที่ไปที่มุม <strong>$180^\circ$</strong></li>
+                        <li>พัลส์กว้าง <strong>$1.0\text{ ms}$</strong> $\rightarrow$ เคลื่อนที่ไปที่มุม <strong>$0^\circ$</strong></li>
+                        <li>พัลส์กว้าง <strong>$1.5\text{ ms}$</strong> $\rightarrow$ เคลื่อนที่ไปที่มุม <strong>$90^\circ$ (ตำแหน่งกลาง)</strong></li>
+                        <li>พัลส์กว้าง <strong>$2.0\text{ ms}$</strong> $\rightarrow$ เคลื่อนที่ไปที่มุม <strong>$180^\circ$</strong></li>
                     </ul>
                 </li>
                 <li>
@@ -2836,10 +2812,7 @@ ightarrow$ เคลื่อนที่ไปที่มุม <strong>$180^\
                             <td>
                                 ระดับปลอดภัยสูงสุด <strong>รับประกันว่าข้อความถึงผู้รับอย่างถูกต้อง และมีเพียงชุดเดียวแน่นอน</strong> 
                                 ไม่มีการสูญหายและไม่มีการส่งซ้ำ ผ่านขั้นตอน Handshake 4 จังหวะ: 
-                                <code>PUBLISH</code> $
-ightarrow$ <code>PUBREC</code> $
-ightarrow$ <code>PUBREL</code> $
-ightarrow$ <code>PUBCOMP</code>
+                                <code>PUBLISH</code> $\rightarrow$ <code>PUBREC</code> $\rightarrow$ <code>PUBREL</code> $\rightarrow$ <code>PUBCOMP</code>
                             </td>
                             <td>ระบบทำธุรกรรมการเงิน, การหักเงิน IoT, ระบบเปิด-ปิดสวิตช์เครื่องจักรสำคัญที่ห้ามผิดพลาด</td>
                         </tr>
@@ -2956,9 +2929,7 @@ ightarrow$ <code>PUBCOMP</code>
                 <li><strong>การเชื่อมต่อ WiFi:</strong> ใช้ Library <code>WiFiS3</code> เชื่อมต่อเข้ากับ Access Point / Mobile Hotspot ด้วย SSID และ Password</li>
                 <li><strong>การเชื่อมต่อ MQTT:</strong> ใช้ Library <code>MQTTClient (256dpi)</code> ประกาศ <code>WiFiClient network; MQTTClient client;</code></li>
                 <li><strong>Lab 3 (Telemetry):</strong> บอร์ดอ่านค่าจากตัวต้านทานปรับค่าได้ (Potentiometer) ด้วย <code>analogRead(A0)</code> แล้วใช้คำสั่ง <code>client.publish("topic/analog", String(val));</code> ส่งค่าขึ้น Broker ทุก 1 วินาที หน้าเว็บที่ Subscribe ไว้จะแสดงตัวเลขและกราฟทันที</li>
-                <li><strong>Lab 5 (Cloud Actuator Control):</strong> ผู้ใช้ปรับค่าบนหน้าเว็บ $
-ightarrow$ เว็บ Publish ค่าความสว่าง ($0-255$) $
-ightarrow$ บอร์ด Subscribe ในฟังก์ชัน <code>messageReceived()</code> นำค่าที่ได้รับไปสั่ง <code>analogWrite(ledPin, val)</code> เพื่อหรี่ไฟ LED จากระยะไกลผ่านอินเทอร์เน็ต!</li>
+                <li><strong>Lab 5 (Cloud Actuator Control):</strong> ผู้ใช้ปรับค่าบนหน้าเว็บ $\rightarrow$ เว็บ Publish ค่าความสว่าง ($0-255$) $\rightarrow$ บอร์ด Subscribe ในฟังก์ชัน <code>messageReceived()</code> นำค่าที่ได้รับไปสั่ง <code>analogWrite(ledPin, val)</code> เพื่อหรี่ไฟ LED จากระยะไกลผ่านอินเทอร์เน็ต!</li>
             </ul>
 
             
@@ -3508,8 +3479,7 @@ ightarrow$ บอร์ด Subscribe ในฟังก์ชัน <code>messag
                         <tr>
                             <td><strong>สมการเทอร์มิสเตอร์ (Beta Equation)</strong></td>
                             <td>
-                                $$\frac{1}{T} = \frac{1}{T_0} + \frac{1}{B} \ln\left(\frac{R_T}{R_0}
-ight)$$
+                                $$\frac{1}{T} = \frac{1}{T_0} + \frac{1}{B} \ln\left(\frac{R_T}{R_0}\right)$$
                             </td>
                             <td>$T, T_0$: อุณหภูมิสัมบูรณ์ (Kelvin: $K = ^\circ\text{C} + 273.15$)<br/>$R_0$: ความต้านทานที่ $T_0$ ($25^\circ\text{C}$)<br/>$B$: ค่าสัมประสิทธิ์ Beta (K)</td>
                         </tr>
@@ -3519,9 +3489,7 @@ ight)$$
                                 $$V_{out} = (0.01 \times T_A) + 0.5\text{ V}$$
                                 $$T_A = (V_{out} - 0.5) \times 100$$
                             </td>
-                            <td>ความไว $10\text{ mV}/^\circ\text{C}$<br/>ที่ $0^\circ\text{C} 
-ightarrow 0.5\text{ V}$<br/>ที่ $50^\circ\text{C} 
-ightarrow 1.0\text{ V}$</td>
+                            <td>ความไว $10\text{ mV}/^\circ\text{C}$<br/>ที่ $0^\circ\text{C} \rightarrow 0.5\text{ V}$<br/>ที่ $50^\circ\text{C} \rightarrow 1.0\text{ V}$</td>
                         </tr>
                         <tr>
                             <td><strong>เซนเซอร์ระยะทาง HC-SR04</strong></td>
